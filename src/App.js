@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { Suspense } from "react";
+import { Provider } from "react-redux";
+import { ErrorBoundary } from "react-error-boundary";
+import Spinner from "./components/custom/spinner/Spinner";
+import MyRoute from "./components/custom/other/MyRoute";
+import store from "./store/store";
+import ErrorFallback from "./components/custom/other/ErrorFallback";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Provider store={store}>
+      <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <Suspense fallback={<Spinner />}>
+          <MyRoute></MyRoute>
+        </Suspense>
+      </ErrorBoundary>
+    </Provider>
   );
 }
 
