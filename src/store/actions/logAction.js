@@ -1,13 +1,13 @@
 // import axios from "axios";
-import { responseDelay, actionKeyType } from './../constants';
+import { responseDelay, actionKeyType } from "./../constants";
 
 /**Fetch new rows of log file
- * 
+ *
  * The function is a mock function which return response with a 2 seconds delay
  * In real application better to use axios library which is added to the project
- * 
+ *
  * @param {number} from - which shows count of received rows in log file
- * @returns dispatch new rows of log file to reducer. 
+ * @returns dispatch new rows of log file to reducer.
  */
 export const getLogfile = (from) => (dispatch) => {
   dispatch(setLoading());
@@ -43,7 +43,7 @@ const setLoading = () => {
 
 /**
  * Function to create Mock logfile
- * 
+ *
  * @param {number} from - shows size of returned row of log files which should be less than considered rows of logfile
  * @returns rows of logfile if from is less than size of considered rows or null, if it is not
  */
@@ -81,9 +81,9 @@ function randomRow() {
 
 /**
  * generate random number to maxNumber of received param with at least 2 digits length
- * 
+ *
  * @param {number} maxNumber - max number between randomly generated numbers
- * @returns random number  
+ * @returns random number
  */
 function randomNumber(maxNumber) {
   let result = Math.ceil(Math.random() * maxNumber);
@@ -91,7 +91,7 @@ function randomNumber(maxNumber) {
 }
 
 /**
- * Generate a random severity 
+ * Generate a random severity
  */
 function randomSeverity() {
   switch (Math.ceil(Math.random() * 3)) {

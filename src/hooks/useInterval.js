@@ -5,9 +5,9 @@ import { useEffect, useRef } from "react";
  * by setting null the delay param, it stop calling
  *
  *  @see {@link https://overreacted.io/making-setinterval-declarative-with-react-hooks} for more info
- * 
+ *
  * @param {function} callback - a function to call periodically
- * @param {number} delay - delay time on mili-second, we can set it to null to finish calling function 
+ * @param {number} delay - delay time on mili-second, we can set it to null to finish calling function
  */
 function useInterval(callback, delay) {
   const savedCallback = useRef();

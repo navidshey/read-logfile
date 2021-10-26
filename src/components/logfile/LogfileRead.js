@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import shortid from  "shortid";
+import shortid from "shortid";
 import useInterval from "../../hooks/useInterval";
 import { getLogfile } from "../../store/actions/logAction";
 import Spinner from "../custom/spinner/Spinner";
@@ -9,7 +9,6 @@ import Grid from "@mui/material/Grid";
 import Container from "@material-ui/core/Container";
 import Paper from "@mui/material/Paper";
 import { makeStyles } from "@material-ui/core/styles";
-
 
 const useStyles = makeStyles({
   sticky: {
@@ -31,7 +30,7 @@ const useStyles = makeStyles({
 
 /**
  * Component to Fetch periodically and show logfile with its details
- * 
+ *
  * It fetch Data every 1 second and new received rows attached to the end of existing rows
  */
 export default function LogFileRead() {
@@ -48,9 +47,8 @@ export default function LogFileRead() {
   );
   useInterval(fetchData, delay);
 
-
   /**
-   * On receiving new rows of logFiles, count its infos, errors and warnings rows and total lines 
+   * On receiving new rows of logFiles, count its infos, errors and warnings rows and total lines
    * If no new line exist stop process of periodic calling
    */
   useEffect(() => {

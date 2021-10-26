@@ -1,7 +1,6 @@
 import React from "react";
 import { PropTypes } from "prop-types";
 
-
 /**
  * A component that show error message
  * @param error error message

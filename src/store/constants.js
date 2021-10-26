@@ -1,4 +1,3 @@
-
 /**
  * different action type of the application specifies in this object
  */
@@ -12,5 +11,5 @@ export const apiRoutes = {
   getLogfile: "https://localhost:5000/getLogfile/...",
 };
 
-export const responseDelay =200;
+export const responseDelay = 200;
 export const periodOfCall = 1000;

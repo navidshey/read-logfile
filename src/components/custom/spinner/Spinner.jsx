@@ -2,7 +2,7 @@ import Skeleton from "@mui/material/Skeleton";
 import React from "react";
 
 /**
- * 
+ *
  * @returns Loading icons when ever data is fetching
  */
 const Spinner = () => {
