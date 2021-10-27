@@ -94,9 +94,9 @@ export default function LogFileRead({logFileUrl}) {
         <Grid item xs={12} md={2} lg={2} key="status">
           <Grid className={classes.sticky}>
             <CustomBox title={`Info: ${infoCount}`} color="blue" />
-            <CustomBox title={`warning: ${warningCount}`} color="orange" />
-            <CustomBox title={`error: ${errorCount}`} color="red" />
-            <CustomBox title={`total Lines: ${total}`} color="grey" />
+            <CustomBox title={`Warning: ${warningCount}`} color="orange" />
+            <CustomBox title={`Error: ${errorCount}`} color="red" />
+            <CustomBox title={`Total Lines: ${total}`} color="grey" />
           </Grid>
         </Grid>
         <Grid item xs={12} md={10} lg={10} key="logPaper">
@@ -114,7 +114,7 @@ export default function LogFileRead({logFileUrl}) {
             {!logfiles && delay && <Spinner />}
             {logfiles &&
               logfiles.map((row) => {
-                return <div key={shortid.generate()}>{row}</div>;
+                return <div data-testid="rows-data" key={shortid.generate()}>{row}</div>;
               })}
             {logfiles && logfiles.length > 0 && loading && <Spinner />}
           </Paper>
