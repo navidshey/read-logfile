@@ -9,10 +9,10 @@ import { responseDelay, actionKeyType } from "./../constants";
  * @param {number} from - which shows count of received rows in log file
  * @returns dispatch new rows of log file to reducer.
  */
-export const getLogfile = (from) => (dispatch) => {
+export const getLogfile = (url, from) => (dispatch) => {
   dispatch(setLoading());
 
-  // axios.get(apiRoutes.getLogfile)
+  // axios.get(url)
   new Promise((resolve) => {
     setTimeout(() => {
       resolve(Object.assign([], createLogFile(from)));

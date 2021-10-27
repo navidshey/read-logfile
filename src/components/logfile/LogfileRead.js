@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import PropTypes from "prop-types";
 import shortid from "shortid";
 import useInterval from "../../hooks/useInterval";
 import { getLogfile } from "../../store/actions/logAction";
@@ -32,8 +33,10 @@ const useStyles = makeStyles({
  * Component to Fetch periodically and show logfile with its details
  *
  * It fetch Data every 1 second and new received rows attached to the end of existing rows
+ * 
+ * @param {string} logFileUrl - in real application it is more applicable to send url of file to read. now it is empty
  */
-export default function LogFileRead() {
+export default function LogFileRead({logFileUrl}) {
   const logFileDispatch = useDispatch();
 
   const [errorCount, setErrorCount] = useState(0);
@@ -47,10 +50,9 @@ export default function LogFileRead() {
   );
   useInterval(fetchData, delay);
 
-  /**
-   * On receiving new rows of logFiles, count its infos, errors and warnings rows and total lines
-   * If no new line exist stop process of periodic calling
-   */
+  
+   //On receiving new rows of logFiles, count its infos, errors and warnings rows and total lines
+   // If no new line exist stop process of periodic calling 
   useEffect(() => {
     newRows && setTotal((x) => x + newRows.length);
     newRows && countRowsDetails();
@@ -83,7 +85,7 @@ export default function LogFileRead() {
    * Fetch new rows of log file based on the currenct total rows fetched till now
    */
   function fetchData() {
-    logFileDispatch(getLogfile(total));
+    logFileDispatch(getLogfile(logFileUrl, total));
   }
 
   return (
@@ -121,3 +123,8 @@ export default function LogFileRead() {
     </Container>
   );
 }
+
+
+LogFileRead.propTypes = {
+  logFileUrl: PropTypes.string,
+};

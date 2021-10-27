@@ -25,7 +25,7 @@ const logFileReducer = (state = initialState, action) => {
         error: null,
         loading: false,
         logfiles: state.logfiles
-          ? state.logfiles.concat(action.payload) // [state.logfile, ...action.payload]
+          ? [...state.logfiles, ...action.payload]
           : action.payload,
         newRows: action.payload,
       };
