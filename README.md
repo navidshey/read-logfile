@@ -1,6 +1,6 @@
 # AlveoTech test
 
-An application developed with React, redux and material ui. In this project we read Logfile periodically, its server call api is mocked and its data is generated in front side. 
+An application developed with React, redux and material ui. In this project we read Logfile periodically, its server call api is mocked and its data is generated in front side. It generate constant size of log rows and after sending all the rows, sending finished and no more call happened. 
 
 ## Run The Application
 

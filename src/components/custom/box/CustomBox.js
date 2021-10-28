@@ -14,7 +14,7 @@ import Typography from "@mui/material/Typography";
 export function CustomBox({ className, title, color }) {
   return (
     <Card className={className} sx={{ maxWidth: 1, my: 1 }}>
-      <CardMedia sx={{ background: color }}  data-testid="custom-box">
+      <CardMedia sx={{ background: color }} data-testid="custom-box">
         <Typography sx={{ pt: 1, pl: 1, pb: 1 }} color="white">
           {title}
         </Typography>

@@ -33,10 +33,10 @@ const useStyles = makeStyles({
  * Component to Fetch periodically and show logfile with its details
  *
  * It fetch Data every 1 second and new received rows attached to the end of existing rows
- * 
+ *
  * @param {string} logFileUrl - in real application it is more applicable to send url of file to read. now it is empty
  */
-export default function LogFileRead({logFileUrl}) {
+export default function LogFileRead({ logFileUrl }) {
   const logFileDispatch = useDispatch();
 
   const [errorCount, setErrorCount] = useState(0);
@@ -50,9 +50,8 @@ export default function LogFileRead({logFileUrl}) {
   );
   useInterval(fetchData, delay);
 
-  
-   //On receiving new rows of logFiles, count its infos, errors and warnings rows and total lines
-   // If no new line exist stop process of periodic calling 
+  //On receiving new rows of logFiles, count its infos, errors and warnings rows and total lines
+  // If no new line exist stop process of periodic calling
   useEffect(() => {
     newRows && setTotal((x) => x + newRows.length);
     newRows && countRowsDetails();
@@ -114,7 +113,11 @@ export default function LogFileRead({logFileUrl}) {
             {!logfiles && delay && <Spinner />}
             {logfiles &&
               logfiles.map((row) => {
-                return <div data-testid="rows-data" key={shortid.generate()}>{row}</div>;
+                return (
+                  <div data-testid="rows-data" key={shortid.generate()}>
+                    {row}
+                  </div>
+                );
               })}
             {logfiles && logfiles.length > 0 && loading && <Spinner />}
           </Paper>
@@ -123,7 +126,6 @@ export default function LogFileRead({logFileUrl}) {
     </Container>
   );
 }
-
 
 LogFileRead.propTypes = {
   logFileUrl: PropTypes.string,
