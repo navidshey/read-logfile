@@ -10,7 +10,7 @@ const ErrorDiv = styled.div`
 `;
 
 /**
- * @returns Is the component when the page not found, shous the error
+ * @returns Is the component when the page not found, shows the error
  */
 const NotFount = () => {
   return (
