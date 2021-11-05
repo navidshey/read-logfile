@@ -37,12 +37,9 @@ const useStyles = makeStyles({
  * @param {string} logFileUrl - in real application it is more applicable to send url of file to read. now it is empty
  */
 export default function LogFileRead({ logFileUrl }) {
+  const boxCollors = ["blue", "orange", "red", "grey"];
   const logFileDispatch = useDispatch();
-
-  const [errorCount, setErrorCount] = useState(0);
-  const [infoCount, setInfoCount] = useState(0);
-  const [warningCount, setWarningCount] = useState(0);
-  const [total, setTotal] = useState(0);
+  const [messageCount, setMessageCount] = useState({ total: 0 });
   const [delay, setDelay] = useState(1000);
   const classes = useStyles();
   const { newRows, logfiles, loading, error } = useSelector(
@@ -53,7 +50,6 @@ export default function LogFileRead({ logFileUrl }) {
   //On receiving new rows of logFiles, count its infos, errors and warnings rows and total lines
   // If no new line exist stop process of periodic calling
   useEffect(() => {
-    newRows && setTotal((x) => x + newRows.length);
     newRows && countRowsDetails();
     if ((!newRows || newRows.length === 0) && logfiles) {
       setDelay(null);
@@ -68,15 +64,18 @@ export default function LogFileRead({ logFileUrl }) {
         let status = newRows[i].split(" ")[2];
         result[status]++;
       }
-      if (result["INFO"]) {
-        setInfoCount((x) => x + result["INFO"]);
-      }
-      if (result["ERROR"]) {
-        setErrorCount((x) => x + result["ERROR"]);
-      }
-      if (result["WARNING"]) {
-        setWarningCount((x) => x + result["WARNING"]);
-      }
+
+      setMessageCount(() =>
+        [result].reduce(function (prev, cur) {
+          Object.entries(cur).map((value) => {
+            prev[value[0]]
+              ? (prev[value[0]] += value[1])
+              : (prev[value[0]] = value[1]);
+            prev["total"] += value[1];
+          });
+          return prev;
+        }, messageCount)
+      );
     }
   }, [newRows, logfiles]);
 
@@ -84,7 +83,7 @@ export default function LogFileRead({ logFileUrl }) {
    * Fetch new rows of log file based on the currenct total rows fetched till now
    */
   function fetchData() {
-    logFileDispatch(getLogfile(logFileUrl, total));
+    logFileDispatch(getLogfile(logFileUrl, messageCount["total"]));
   }
 
   return (
@@ -92,10 +91,13 @@ export default function LogFileRead({ logFileUrl }) {
       <Grid container spacing={2}>
         <Grid item xs={12} md={2} lg={2} key="status">
           <Grid className={classes.sticky}>
-            <CustomBox title={`Info: ${infoCount}`} color="blue" />
-            <CustomBox title={`Warning: ${warningCount}`} color="orange" />
-            <CustomBox title={`Error: ${errorCount}`} color="red" />
-            <CustomBox title={`Total Lines: ${total}`} color="grey" />
+            {Object.entries(messageCount).map((row, index) => (
+              <CustomBox
+                key={`${row[0]}-row`}
+                title={`${row[0]}: ${row[1]}`}
+                color={boxCollors[index]}
+              />
+            ))}
           </Grid>
         </Grid>
         <Grid item xs={12} md={10} lg={10} key="logPaper">

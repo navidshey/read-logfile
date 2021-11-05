@@ -29,14 +29,14 @@ const logFileReducer = (state = initialState, action) => {
           : action.payload,
         newRows: action.payload,
       };
-      case actionKeyType.GET_LOGFILE_ERROR:
-        return{
-          ...state,
-          error: action.pay.LOADING,
-          loading: false,
-          logfiles: state.logfiles,
-          newRows: null
-        }
+    case actionKeyType.GET_LOGFILE_ERROR:
+      return {
+        ...state,
+        error: action.pay.LOADING,
+        loading: false,
+        logfiles: state.logfiles,
+        newRows: null,
+      };
     default:
       return state;
   }
