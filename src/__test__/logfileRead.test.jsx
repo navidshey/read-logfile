@@ -14,16 +14,13 @@ function renderComponent(props) {
 describe("<LogFileRead>", () => {
   it("should containing five box with their initial content", async () => {
     const { container } = renderComponent();
-    let [info, warning, error, total, header] =
+    let [total, header] =
       container.getElementsByClassName("MuiCardMedia-root");
 
     expect(container.getElementsByClassName("MuiCardMedia-root").length).toBe(
-      5
+      2
     );
-    expect(info.textContent).toBe("Info: 0");
-    expect(warning.textContent).toBe("Warning: 0");
-    expect(error.textContent).toBe("Error: 0");
-    expect(total.textContent).toBe("Total Lines: 0");
+    expect(total.textContent).toBe("total: 0");
     expect(header.textContent).toBe(
       "Reading log file every 1000 Mili-second ..."
     );
